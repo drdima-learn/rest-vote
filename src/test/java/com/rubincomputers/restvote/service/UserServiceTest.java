@@ -14,7 +14,8 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import java.util.List;
 
 import static com.rubincomputers.restvote.UserTestData.*;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 @SpringBootTest
 @Sql(scripts = "classpath:data.sql", config = @SqlConfig(encoding = "UTF-8"))
@@ -31,14 +32,33 @@ public class UserServiceTest {
 
     @Test
     public void getNotFound() {
-        //throw new NotFoundException("ppp");
         assertThrows(NotFoundException.class, () -> service.get(NOT_FOUND));
+    }
+
+    @Test
+    public void getByEmail() {
+        User user = service.getByEmail("admin@gmail.com");
+        USER_MATCHER.assertMatch(user, admin);
+    }
+
+    @Test
+    public void getByEmailNotFound() {
+        assertThrows(NotFoundException.class, () -> service.getByEmail("notfound@gmail.com"));
     }
 
     @Test
     public void getAll() {
         List<User> all = service.getAll();
         USER_MATCHER.assertMatch(all, admin, guest, user);
+    }
+
+    @Test
+    public void getAllEmptyList() {
+        service.delete(100000);
+        service.delete(100001);
+        service.delete(100002);
+        List<User> all = service.getAll();
+        USER_MATCHER.assertMatch(all, List.of());
     }
 
     @Test
@@ -66,5 +86,19 @@ public class UserServiceTest {
     @Test
     public void deletedNotFound() {
         assertThrows(NotFoundException.class, () -> service.delete(NOT_FOUND));
+    }
+
+    @Test
+    public void update() {
+        User updated = getUpdated();
+        service.update(updated);
+        USER_MATCHER.assertMatch(service.get(USER_ID), getUpdated());
+    }
+
+    @Test
+    public void updateNotFound() {
+        User updated = getUpdated();
+        updated.setId(NOT_FOUND);
+        assertThrows(NotFoundException.class, () -> service.update(updated));
     }
 }

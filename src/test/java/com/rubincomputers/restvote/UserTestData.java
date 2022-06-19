@@ -29,7 +29,7 @@ public class UserTestData {
 
 
 
-    /*public static User getUpdated() {
+    public static User getUpdated() {
         User updated = new User(user);
         updated.setEmail("update@gmail.com");
         updated.setName("UpdatedName");
@@ -37,5 +37,5 @@ public class UserTestData {
         updated.setEnabled(false);
         updated.setRoles(Collections.singletonList(Role.ADMIN));
         return updated;
-    }*/
+    }
 }

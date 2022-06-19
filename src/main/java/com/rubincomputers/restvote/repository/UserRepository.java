@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Transactional(readOnly = true)
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -19,4 +21,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query("DELETE FROM User u WHERE u.id=:id")
     int deleteById(@Param("id") int id);
+
+    Optional<User> getByEmail(String email);
 }
