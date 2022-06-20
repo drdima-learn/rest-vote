@@ -1,6 +1,6 @@
 package com.rubincomputers.restvote.controller;
 
-import com.rubincomputers.restvote.entity.User;
+import com.rubincomputers.restvote.model.User;
 import com.rubincomputers.restvote.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

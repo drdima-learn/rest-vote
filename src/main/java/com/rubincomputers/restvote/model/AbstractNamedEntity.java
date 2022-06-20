@@ -1,4 +1,4 @@
-package com.rubincomputers.restvote.entity;
+package com.rubincomputers.restvote.model;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
