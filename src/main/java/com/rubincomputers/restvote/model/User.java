@@ -1,7 +1,8 @@
-package com.rubincomputers.restvote.entity;
+package com.rubincomputers.restvote.model;
 
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
@@ -55,7 +56,7 @@ public class User extends AbstractNamedEntity{
     @Size(min = 5, max = 128)
     private String password;
 
-    @Column(name = "enabled", nullable = false, columnDefinition = "boolean default true")
+    @Column(name = "enabled", nullable = false, columnDefinition = "boolean default true", updatable = false)
     private boolean enabled = true;
 
     @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
@@ -64,12 +65,13 @@ public class User extends AbstractNamedEntity{
 
 
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+    @CollectionTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
             uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role"}, name = "uk_user_roles")})
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
-//    @Fetch(FetchMode.SUBSELECT)
-    @BatchSize(size = 200)
+    @JoinColumn(name = "user_id") //https://stackoverflow.com/a/62848296/548473
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Role> roles;
 
     public void setRoles(Collection<Role> roles) {

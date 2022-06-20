@@ -1,6 +1,6 @@
 package com.rubincomputers.restvote.util;
 
-import com.rubincomputers.restvote.entity.AbstractBaseEntity;
+import com.rubincomputers.restvote.model.AbstractBaseEntity;
 
 public class ValidationUtil {
     public static void checkNew(AbstractBaseEntity entity) {

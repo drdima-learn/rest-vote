@@ -1,6 +1,6 @@
 package com.rubincomputers.restvote.service;
 
-import com.rubincomputers.restvote.entity.User;
+import com.rubincomputers.restvote.model.User;
 import com.rubincomputers.restvote.exception.NotFoundException;
 import com.rubincomputers.restvote.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +31,13 @@ public class UserService {
 
 
     public void delete(int id) {
-        if (repository.deleteById(id) == 0) {
+        if (repository.delete(id) == 0) {
             throw new NotFoundException("User not found id=" + id);
         }
+    }
+
+    public void deleteAll(){
+        repository.deleteAll();
     }
 
 
