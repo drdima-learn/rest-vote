@@ -20,6 +20,17 @@ VALUES  ('rest1',true),
         ('rest3', false);
 
 
+DELETE FROM DISHES;
+INSERT INTO DISHES (NAME, DAY, PRICE, RESTAURANT_ID)
+VALUES  ('dish1 - rest1',NOW(), 101, 1),
+        ('dish2 - rest1',NOW(), 202, 1),
+        ('dish3 - rest1',NOW(), 303, 1),
+        ('dish4 - rest2',NOW(), 404, 2),
+        ('dish5 - rest2',NOW(), 505, 2),
+        ('dish6 - rest3',NOW(), 606, 3);
+
+
+
 
 
 

@@ -1,24 +1,20 @@
 package com.rubincomputers.restvote.repository;
 
+import com.rubincomputers.restvote.AbstractTest;
 import com.rubincomputers.restvote.model.Restaurant;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static com.rubincomputers.restvote.repository.RestaurantTestData.*;
+import static com.rubincomputers.restvote.testdata.RestaurantTestData.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
 
-@SpringBootTest
-@Transactional
-@ActiveProfiles("test")
-public class RestaurantRepositoryTest {
+
+public class RestaurantRepositoryTest extends AbstractTest {
     @Autowired
     private RestaurantRepository repository;
 
