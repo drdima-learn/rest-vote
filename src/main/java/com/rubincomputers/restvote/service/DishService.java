@@ -5,17 +5,21 @@ import com.rubincomputers.restvote.model.Dish;
 import com.rubincomputers.restvote.repository.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import java.util.List;
 
 @Service
-public class DishService {
+public class DishService extends AbstractService<Dish>{
 
     @Autowired
     private DishRepository repository;
 
-    public Dish get(int id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Dish not found with id: " + id));
-    }
+
+
+
+
+
 
 
 //    public User create(User user) {
