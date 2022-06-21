@@ -1,6 +1,7 @@
-package com.rubincomputers.restvote;
+package com.rubincomputers.restvote.testdata;
 
 
+import com.rubincomputers.restvote.MatcherFactory;
 import com.rubincomputers.restvote.model.Role;
 import com.rubincomputers.restvote.model.User;
 

@@ -1,27 +1,22 @@
 package com.rubincomputers.restvote.service;
 
-import com.rubincomputers.restvote.UserTestData;
+import com.rubincomputers.restvote.AbstractTest;
+import com.rubincomputers.restvote.testdata.UserTestData;
 import com.rubincomputers.restvote.model.Role;
 import com.rubincomputers.restvote.model.User;
 import com.rubincomputers.restvote.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.rubincomputers.restvote.UserTestData.*;
+import static com.rubincomputers.restvote.testdata.UserTestData.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-@SpringBootTest
-@Transactional
-@ActiveProfiles("test")
-//@Sql(scripts = "classpath:data.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class UserServiceTest {
+
+public class UserServiceTest extends AbstractTest {
     @Autowired
     private UserService service;
 
