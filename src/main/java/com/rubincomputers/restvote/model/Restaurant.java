@@ -2,9 +2,8 @@ package com.rubincomputers.restvote.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "restaurants")
@@ -24,9 +23,13 @@ public class Restaurant extends AbstractNamedEntity{
     }
 
     public Restaurant(Restaurant restaurant){
-        this(restaurant.id, restaurant.name, restaurant.enabled);
+        this(restaurant.getId(), restaurant.getName(), restaurant.isEnabled());
     }
 
     @Column(name = "enabled", nullable = false, columnDefinition = "boolean default true", updatable = false)
     private boolean enabled = true;
+
+    @OneToMany //(mappedBy="restaurant")
+    @JoinColumn(name = "restaurant_id")
+    private Set<Dish> dishes;
 }

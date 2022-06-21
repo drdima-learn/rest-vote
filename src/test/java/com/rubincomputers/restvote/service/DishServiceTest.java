@@ -25,6 +25,13 @@ public class DishServiceTest extends AbstractTest {
     }
 
     @Test
+    public void getWithRestaurant() {
+        Dish dish = service.getWithRestaurant(DISH1_ID);
+        DISH_MATCHER.assertMatch(dish, DishTestData.dish1);
+    }
+
+
+    @Test
     public void getNotFound() {
         assertThrows(NotFoundException.class, () -> service.get(DISH_NOT_FOUND_ID));
     }

@@ -1,5 +1,6 @@
 package com.rubincomputers.restvote.model;
 
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -21,6 +22,10 @@ import java.time.LocalDate;
 //        }
 )
 
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(callSuper = true)
 public class Vote extends AbstractBaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,4 +43,15 @@ public class Vote extends AbstractBaseEntity {
     @Column(name = "day")
     private LocalDate day;
 
+
+    public Vote(Integer id, Restaurant restaurant, User user, LocalDate day) {
+        super(id);
+        this.restaurant = restaurant;
+        this.user = user;
+        this.day = day;
+    }
+
+    public Vote(Vote vote){
+        this(vote.id, vote.restaurant, vote.user, vote.day);
+    }
 }

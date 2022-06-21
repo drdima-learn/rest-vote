@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = "restaurant")
 public class Dish extends AbstractNamedEntity {
 
     public Dish(Integer id, String name, long price, LocalDate day, Restaurant restaurant) {
@@ -25,10 +25,6 @@ public class Dish extends AbstractNamedEntity {
 
     public Dish(Integer id, String name, long price, LocalDate day) {
         this(id, name, price, day, null);
-    }
-
-    public Dish(Integer id, String name, long price) {
-        this(id, name, price, LocalDate.now(), null);
     }
 
     public Dish(Dish dish) {
