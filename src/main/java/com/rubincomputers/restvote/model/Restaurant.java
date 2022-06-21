@@ -1,9 +1,6 @@
 package com.rubincomputers.restvote.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,10 +10,9 @@ import javax.persistence.Table;
 @Table(name = "restaurants")
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(callSuper = true)
 public class Restaurant extends AbstractNamedEntity{
-
 
     public Restaurant(Integer id, String name, boolean enabled) {
         super(id, name);
@@ -30,7 +26,6 @@ public class Restaurant extends AbstractNamedEntity{
     public Restaurant(Restaurant restaurant){
         this(restaurant.id, restaurant.name, restaurant.enabled);
     }
-
 
     @Column(name = "enabled", nullable = false, columnDefinition = "boolean default true", updatable = false)
     private boolean enabled = true;

@@ -18,12 +18,10 @@ public class UserRestController {
     @Autowired
     private UserService service;
 
-
     @PostMapping("/users")
     public User create(@RequestBody User user) {
         log.info("create {}", user);
         checkNew(user);
         return service.create(user);
     }
-
 }

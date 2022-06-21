@@ -16,8 +16,6 @@ import java.time.LocalDate;
 @ToString(callSuper = true)
 public class Dish extends AbstractNamedEntity {
 
-
-
     public Dish(Integer id, String name, long price, LocalDate day, Restaurant restaurant) {
         super(id, name);
         this.price = price;
@@ -37,9 +35,8 @@ public class Dish extends AbstractNamedEntity {
         this(dish.id, dish.name, dish.price, dish.day, dish.restaurant);
     }
 
-    // price store in cents
     @Column(name = "price")
-    private long price;
+    private long price; // price stores in cents
 
     @Column(name = "day", nullable = false)
     @NotNull
@@ -50,5 +47,4 @@ public class Dish extends AbstractNamedEntity {
     @NotNull
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
-
 }

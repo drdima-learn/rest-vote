@@ -2,8 +2,6 @@ package com.rubincomputers.restvote.service;
 
 import com.rubincomputers.restvote.exception.NotFoundException;
 import com.rubincomputers.restvote.model.AbstractBaseEntity;
-import com.rubincomputers.restvote.model.Dish;
-import com.rubincomputers.restvote.model.User;
 import com.rubincomputers.restvote.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -17,7 +15,7 @@ import java.util.List;
 public abstract class AbstractService<T extends AbstractBaseEntity> {
 
     @Autowired
-    protected BaseRepository<T > repository;
+    protected BaseRepository<T> repository;
 
     protected String entity = getGenericName();
 
@@ -34,8 +32,7 @@ public abstract class AbstractService<T extends AbstractBaseEntity> {
         T updated = null;
         try {
             updated = repository.save(t);
-        }
-        catch (ConstraintViolationException e){
+        } catch (ConstraintViolationException e) {
             throw new NotFoundException(entity + " with wrong id");
         }
         if (updated.id() != t.id()) {
@@ -67,11 +64,7 @@ public abstract class AbstractService<T extends AbstractBaseEntity> {
         repository.deleteAll();
     }
 
-
-
-
-    protected String getGenericName()
-    {
+    protected String getGenericName() {
         return ((Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0]).getSimpleName();
     }

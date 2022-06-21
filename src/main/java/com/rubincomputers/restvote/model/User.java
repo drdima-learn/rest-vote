@@ -17,10 +17,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-@Data
-@NoArgsConstructor
-public class User extends AbstractNamedEntity{
-
+@Getter
+@Setter
+@ToString(callSuper = true, exclude = {"password"})
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class User extends AbstractNamedEntity {
 
     public User(Integer id, String name, String email, String password, boolean enabled, Date registered, Collection<Role> roles) {
         super(id, name);
@@ -35,13 +36,7 @@ public class User extends AbstractNamedEntity{
         this(id, name, email, password, true, new Date(), Set.of(roles));
     }
 
-
-
-//    public User(Integer id, String name, String email, String password) {
-//        this(id, name, email, password, Set.of());
-//    }
-
-    public User(User user){
+    public User(User user) {
         this(user.id, user.name, user.email, user.password, user.enabled, user.registered, user.roles);
     }
 
@@ -63,11 +58,13 @@ public class User extends AbstractNamedEntity{
     @NotNull
     private Date registered = new Date();
 
-
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
-            uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role"}, name = "uk_user_roles")})
+            uniqueConstraints = {
+                    @UniqueConstraint(columnNames = {"user_id", "role"}, name = "uk_user_roles")
+            }
+    )
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id") //https://stackoverflow.com/a/62848296/548473
@@ -77,6 +74,4 @@ public class User extends AbstractNamedEntity{
     public void setRoles(Collection<Role> roles) {
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
-
-
 }
